@@ -1,8 +1,8 @@
 import axios from "axios";
 import {useState, useContext} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {NotificationContainer, NotificationManager} from "react-notifications";
-import LoginContext from "../Contexts/LoginContext";
+import Login from "../Contexts/Login";
+import requisitionLogin from "./Requisition"
 
 export default function Login() {
     const { LoginContext, setLoginContext } = useContext(LoginContext);
@@ -18,7 +18,7 @@ export default function Login() {
     function OnSubmit(e) {
         setDisabled(true);
         e.preventDefault();
-        const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", {email: email, password: password, })
+        const promisse = axios.post(requisitionLogin, {email: email, password: password, })
         promisse.then((answer) => {
             localStorage.setItem("user", JSON.stringify({
                 token: answer.data.token, image: answer.data.image, name: answer.data.name,})
