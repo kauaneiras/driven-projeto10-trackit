@@ -7,7 +7,10 @@ export default createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Lexend Deca', sans-serif;
     }
+
+
     // RESET
+
     html,
     body,
     div,
@@ -96,7 +99,6 @@ export default createGlobalStyle`
     vertical-align: baseline;
     text-decoration: none;
     }
-    
     /* HTML5 display-role reset for older browsers */
     article,
     aside,
