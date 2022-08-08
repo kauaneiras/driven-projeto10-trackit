@@ -9,11 +9,11 @@ export default function Router() {
 	return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Login />}/>
+                <Route path="/" element={<Login/>}/>
                 <Route path="/Register" element={<Register/>}/>
-                <Route path="/Habits" element={<Habits />}/>
-                <Route path="/Today" element={<Today />}/>
-                <Route path="/Historic" element={<Historic />}/>
+                <Route path="/Habits" element={<Habits/>}/>
+                <Route path="/Today" element={<Today/>}/>
+                <Route path="/Historic" element={<Historic/>}/>
             </Routes>
         </BrowserRouter >
     )

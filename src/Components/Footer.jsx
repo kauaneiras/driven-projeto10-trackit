@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import React from "react";
+import { Link } from "react-router-dom";
 import { useContext } from 'react';
 import {Animate} from "react-move";
 import { Progress } from '../Contexts';
@@ -8,7 +8,6 @@ import { easeQuadInOut } from "d3-ease";
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
 
-//styles
 const Historic = styled.div
 `   color: #52B6FF;
     width: 100%;
@@ -55,9 +54,9 @@ const ProgressBar = styled.div
     bottom: 10px;
     right: 35%;`
 
-class AnimatedProgressProvider extends React.Component {
-  interval = undefined;
+class CircleAnimation extends React.Component {
   state = {isAnimated: false};
+  interval = undefined;
   static defaultProps = {valueStart: 0};
 
   Mounted() {
@@ -84,23 +83,12 @@ export default function Footer() {
     return (
         <>  <Link to="/Today">
                 <ProgressBar>
-                    <AnimatedProgressProvider valueStart={0} valueEnd={progress} duration={1.4} easingFunction={easeQuadInOut}>
+                    <CircleAnimation valueStart={0} valueEnd={progress} duration={1.4} easingFunction={easeQuadInOut}>
                         {value => {
                         return (
-                            <CircularProgressbar
-                                value={value}
-                                text={"Hoje"}
-                                background
-                                backgroundPadding={6}
-                                styles={buildStyles({
-                                    pathTransition: "none",
-                                    backgroundColor: "#52B6FF",
-                                    textColor: "#ffffff",
-                                    pathColor: "#ffffff",
-                                    trailColor: "transparent"
-                                })}/>
-                            );}}
-                    </AnimatedProgressProvider>
+                            <CircularProgressbar value={value} text={"Hoje"} background backgroundPadding={6}
+                                styles={buildStyles({pathTransition: "none", backgroundColor: "#52B6FF", textColor: "#ffffff", pathColor: "#ffffff", trailColor: "transparent"})}/>);}}
+                    </CircleAnimation>
                 </ProgressBar>
             </Link>
             <FooterApp>
