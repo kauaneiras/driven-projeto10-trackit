@@ -1,17 +1,17 @@
-import { useContext } from 'react';
-import axios from 'axios';
-import { AllHabits, LoginUser, Requisition } from '../Contexts';
-import styled from 'styled-components';
+import { useContext } from "react";
+import { LoginUser, Requisition, AllHabits } from "../Contexts";
+import axios from "axios";
+import styled from "styled-components";
 
 export default function Card() {
     let array = [{day: "D", number: 7}, {day: "S", number: 1}, {day: "T", number: 2}, {day: "Q", number: 3}, {day: "Q", number: 4}, {day: "S", number: 5}, {day: "S", number: 6}];
-    const { allHabits } = useContext(AllHabits);
     const { loginUser } = useContext(LoginUser);
-    const { requisition, setRequisition } = useContext(Requisition);
     const { token } = loginUser;
-
-    function postDelete(e, id){
-        e.preventDefault();
+    const { requisition, setRequisition } = useContext(Requisition);
+    const { allHabits } = useContext(AllHabits);
+    
+    function postDelete(deleteclick, id){
+        deleteclick.preventDefault();
         const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, {headers: {'Authorization': `Bearer ${token}`}})
             promisse.then(() => {setRequisition(!requisition);})
             promisse.catch(() => {alert("Não foi possível deletar o hábito. Por favor, tente novamente");})
@@ -27,7 +27,7 @@ export default function Card() {
                         <HabitDescription>
                             <P>{card.name}</P>
                             <IconTrash>
-                                <ion-icon onClick={(e) => postDelete(e, card.id)} name="trash-outline"></ion-icon>
+                                <ion-icon onClick={(deleteclick) => postDelete(deleteclick, card.id)} name="trash-outline"></ion-icon>
                             </IconTrash>
                         </HabitDescription>
                         <Weekdays>

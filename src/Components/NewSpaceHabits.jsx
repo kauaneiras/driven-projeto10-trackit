@@ -19,9 +19,7 @@ export default function NewCard() {
             setDisabled(true);
             e.preventDefault();
             const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", {
-                name: insertHabit, 
-                days: selected, 
-            }, {headers: {'Authorization': `Bearer ${token}`}})
+                name: insertHabit, days: selected, }, {headers: {'Authorization': `Bearer ${token}`}})
             promisse.then(() => {
                 setAddNewHabit(false);
                 setRequisition(!requisition);

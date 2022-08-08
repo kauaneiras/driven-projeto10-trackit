@@ -3,17 +3,15 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { DailyHabit, LoginUser, Requisition } from '../Contexts';
 
-
-
-export default function CardToday() {
+export default function CardHabitDaily() {
     const { dailyHabit } = useContext(DailyHabit);
     const { requisition, setRequisition } = useContext(Requisition);
     const { loginUser } = useContext(LoginUser);
     const { token } = loginUser;
     const [ disabled, setDisabled ] = useState(false);
 
-    function DoneCard(e,id) {
-        e.preventDefault();
+    function DoneCard(finishhabit,id) {
+        finishhabit.preventDefault();
         setDisabled(true);
         const promisse = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, null, {headers: {'Authorization': `Bearer ${token}`}})
         promisse.then(() => {
@@ -25,8 +23,8 @@ export default function CardToday() {
             setDisabled(false);
         })
     }
-    function NotDoneCard(e, id) {
-        e.preventDefault();
+    function NotDoneCard(finishhabit, id) {
+        finishhabit.preventDefault();
         setDisabled(true);
         const promisse = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, null, {headers: {'Authorization': `Bearer ${token}`}})
         promisse.then(() => {
@@ -41,7 +39,7 @@ export default function CardToday() {
 
     return (
             <>
-            {habitsToday.map(elem => {
+            {dailyHabit.map(elem => {
                 return (
                 <Card>
                     <CenterCards>
@@ -50,7 +48,7 @@ export default function CardToday() {
                             <Sequential fontColorSequential={elem.done ? "#8FC549" : "#666666"}>Sequência atual: {elem.currentSequence} {elem.currentSequence > 1 ? "dias" : "dia"} </Sequential>
                             <Record fontColorRecord={elem.currentSequence === elem.highestSequence ? "#8FC549" : "#666666"}>Seu recorde: {elem.highestSequence} {elem.highestSequence > 1 ? "dias" : "dia"} </Record>
                         </Left>
-                        <IconCheck disabled={disabled} background={elem.done ? "#8FC549" : "#E7E7E7"} onClick={(e) => {elem.done ? NotDoneCard(e, elem.id) : DoneCard(e, elem.id)}}>
+                        <IconCheck disabled={disabled} background={elem.done ? "#8FC549" : "#E7E7E7"} onClick={(finishhabit) => {elem.done ? NotDoneCard(finishhabit, elem.id) : DoneCard(finishhabit, elem.id)}}>
                             <ion-icon name="checkmark-outline"></ion-icon>
                         </IconCheck>
                     </CenterCards>
